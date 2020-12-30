@@ -29,10 +29,15 @@ jobs:
         - name: install dependencies
           run: |
             ./install-dependencies.sh
-            apt-get install -y clang-11
+            echo 'deb https://runsafesecurity.jfrog.io/artifactory/debian buster main' | sudo tee -a /etc/apt/sources.list.d/alkemist.list
+            apt-get -y install gnupg
+            wget -qO - https://runsafesecurity.jfrog.io/artifactory/api/gpg/key/public | sudo apt-key add -
+            apt-get update -y
+            apt-get install -y clang-11 alkemist-lfr
+            source /etc/profile.d/alkemist-lfr.sh
 
         - name: build & test
           env:
             CC: clang-11
             CXX: clang++-11
-          run: ./build.sh -DCMAKE_UNITY_BUILD=ON
+          run: ALKEMIST_LICENSE_KEY=43C678-09EE1B-B8AC0A-3E61BF-BAC94B-V3 lfr-helper ./build.sh -DCMAKE_UNITY_BUILD=ON
