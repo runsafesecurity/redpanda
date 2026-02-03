@@ -27,7 +27,7 @@
     "chokidar": "^3.4.3",
     "mocha": "7.1.1",
     "prettier": "2.0.5",
-    "rewire": "5.0.0",
+    "rewire": "9.0.0",
     "ts-loader": "^8.0.4",
     "ts-node": "^9.0.0",
     "typescript": "3.9.6",
